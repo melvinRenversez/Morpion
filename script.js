@@ -2,6 +2,7 @@ content = document.getElementById("content");
 
 
 buttons = [];
+player = "O";
 
 function draw_grid(){
     for(let row=0; row<3; row++){
@@ -19,12 +20,139 @@ function draw_grid(){
         }
         buttons.push(button_in_row)
     }
-    console.log(buttons)
 }
 
 function button_Click(row, col) {
     button_clicked = buttons[row][col];
-    button_clicked.innerHTML = "X"
+    button_clicked.innerHTML = player
+    check_win(row, col)
+    switch_player();
+}
+
+function check_win(row, col) {
+    // X
+    count = 0
+    for (var i = 0; i < 3; i++) {
+        button = buttons[row][i];
+        if (button.innerHTML === "X"){
+            count++;
+            if (count == 3) {
+                win();
+            }
+        }
+    }
+    count = 0
+    for (var i = 0; i < 3; i++) {
+        button = buttons[i][col];
+        if (button.innerHTML === "X"){
+            count++;
+            if (count == 3) {
+                win();
+            }
+        }
+    }
+    count = 0
+    for (var i = 0; i < 3; i++) {
+        button = buttons[i][i];
+        if (button.innerHTML === "X"){
+            count++;
+            if (count == 3) {
+                win();
+            }
+        }
+    }
+    count = 0
+    for (var i = 0; i < 3; i++) {
+        button = buttons[i][2-i];
+        if (button.innerHTML === "X"){
+            count++;
+            if (count == 3) {
+                win();
+            }
+        }
+    }
+    // O
+    count = 0
+    for (var i = 0; i < 3; i++) {
+        button = buttons[row][i];
+        if (button.innerHTML === "O"){
+            count++;
+            if (count == 3) {
+                win();
+            }
+        }
+    }
+    count = 0
+    for (var i = 0; i < 3; i++) {
+        button = buttons[i][col];
+        if (button.innerHTML === "O"){
+            count++;
+            if (count == 3) {
+                win();
+            }
+        }
+    }
+    count = 0
+    for (var i = 0; i < 3; i++) {
+        button = buttons[i][i];
+        if (button.innerHTML === "O"){
+            count++;
+            if (count == 3) {
+                win();
+            }
+        }
+    }
+    count = 0
+    for (var i = 0; i < 3; i++) {
+        button = buttons[i][2-i];
+        if (button.innerHTML === "O"){
+            count++;
+            if (count == 3) {
+                win();
+            }
+        }
+    }
+}
+
+function switch_player(){
+    if (player == "X"){
+        player = "O";
+    }
+    else{
+        player = "X";
+    }
+}
+
+function win(){
+    winner = player;
+    print_winner(winner);
+}
+
+function print_winner(winner_name){
+    for (var r = 0; r < 3; r++) {
+        for (var c = 0; c < 3; c++) {
+            button = buttons[r][c];
+            button.remove();
+        }
+    }
+    text = document.createElement("h1")
+    text.innerHTML = "The winner is " + winner_name;
+    content.appendChild(text);
+    restart_button = document.createElement("button");
+    restart_button.innerHTML = "Restart";
+    restart_button.addEventListener("click", function(){
+        text.remove();
+        restart_button.remove();
+        restart();
+    })
+    content.appendChild(restart_button);
+
+}
+
+function restart(){
+    buttons = [];
+    players = "O";
+    draw_grid();
 }
 
 draw_grid();
