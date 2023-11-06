@@ -3,6 +3,7 @@ content = document.getElementById("content");
 
 buttons = [];
 player = "O";
+Win = false;
 
 function draw_grid(){
     for(let row=0; row<3; row++){
@@ -14,9 +15,10 @@ function draw_grid(){
             button.addEventListener("click", function(e){
                 button_Click(row, col)
             });
-            button.innerHTML = " "
+            button.innerHTML = "   "
             content.appendChild(button);
             button_in_row.push(button);
+            console.log(button.offsetWidth, button.offsetHeight)
         }
         buttons.push(button_in_row)
     }
@@ -27,6 +29,7 @@ function button_Click(row, col) {
     button_clicked.innerHTML = player
     check_win(row, col)
     switch_player();
+    button.disabled = false
 }
 
 function check_win(row, col) {
@@ -34,9 +37,10 @@ function check_win(row, col) {
     count = 0
     for (var i = 0; i < 3; i++) {
         button = buttons[row][i];
-        if (button.innerHTML === "X"){
+        if (button.innerHTML === "X" && Win == false){
             count++;
             if (count == 3) {
+                Win = true
                 win();
             }
         }
@@ -44,9 +48,10 @@ function check_win(row, col) {
     count = 0
     for (var i = 0; i < 3; i++) {
         button = buttons[i][col];
-        if (button.innerHTML === "X"){
+        if (button.innerHTML === "X" && Win == false){
             count++;
             if (count == 3) {
+                Win = true
                 win();
             }
         }
@@ -54,9 +59,10 @@ function check_win(row, col) {
     count = 0
     for (var i = 0; i < 3; i++) {
         button = buttons[i][i];
-        if (button.innerHTML === "X"){
+        if (button.innerHTML === "X" && Win == false){
             count++;
             if (count == 3) {
+                Win = true
                 win();
             }
         }
@@ -64,9 +70,10 @@ function check_win(row, col) {
     count = 0
     for (var i = 0; i < 3; i++) {
         button = buttons[i][2-i];
-        if (button.innerHTML === "X"){
+        if (button.innerHTML === "X" && Win == false){
             count++;
             if (count == 3) {
+                Win = true
                 win();
             }
         }
@@ -75,9 +82,10 @@ function check_win(row, col) {
     count = 0
     for (var i = 0; i < 3; i++) {
         button = buttons[row][i];
-        if (button.innerHTML === "O"){
+        if (button.innerHTML === "O" && Win == false){
             count++;
             if (count == 3) {
+                Win = true
                 win();
             }
         }
@@ -85,9 +93,10 @@ function check_win(row, col) {
     count = 0
     for (var i = 0; i < 3; i++) {
         button = buttons[i][col];
-        if (button.innerHTML === "O"){
+        if (button.innerHTML === "O" && Win == false){
             count++;
             if (count == 3) {
+                Win = true
                 win();
             }
         }
@@ -95,9 +104,10 @@ function check_win(row, col) {
     count = 0
     for (var i = 0; i < 3; i++) {
         button = buttons[i][i];
-        if (button.innerHTML === "O"){
+        if (button.innerHTML === "O" && Win == false){
             count++;
             if (count == 3) {
+                Win = true
                 win();
             }
         }
@@ -105,9 +115,10 @@ function check_win(row, col) {
     count = 0
     for (var i = 0; i < 3; i++) {
         button = buttons[i][2-i];
-        if (button.innerHTML === "O"){
+        if (button.innerHTML === "O" && Win == false){
             count++;
             if (count == 3) {
+                Win = true
                 win();
             }
         }
@@ -151,7 +162,8 @@ function print_winner(winner_name){
 
 function restart(){
     buttons = [];
-    players = "O";
+    player = "O";
+    Win = false;
     draw_grid();
 }
 
