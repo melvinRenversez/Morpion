@@ -6,6 +6,7 @@ player = "O";
 Win = false;
 
 function draw_grid(){
+    content.style.justifyContent = "";
     for(let row=0; row<3; row++){
         button_in_row = [];
         for(let col=0; col<3; col++){
@@ -140,6 +141,7 @@ function win(){
 }
 
 function print_winner(winner_name){
+    content.style.justifyContent = "center";
     for (var r = 0; r < 3; r++) {
         for (var c = 0; c < 3; c++) {
             button = buttons[r][c];

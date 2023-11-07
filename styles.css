@@ -3,9 +3,11 @@ body{
     justify-content: center ;
     align-items: center;
     height: 98vh;
-    background: #000;
+    background: white;
 }
 .content{
+    color: white;
+    border-radius: 10px;
     display: grid;
     width: 300px;
     max-width: 300px;
